@@ -47,7 +47,7 @@ Follow these steps to set up and run the Document Text Extractor on your local m
 
 1. Clone the repository:
    ```bash
-    git clone <github project url>
+    git clone git@github.com:harshad208/document_text_extractor.git
 2. Navigate to the project directory
 3. cd document_text_extractor/document_text_extractor
 4. create a virtual environment -> python -m venv venv
