@@ -15,7 +15,8 @@ try:
         # Ensure the temp folder exists, create it if not
         if not os.path.exists(temp_path):
             os.makedirs(temp_path)
-
+        host = config.get("ENVIRONMENT", "HOST")
+        port = int(config.get("ENVIRONMENT", "PORT"))
     except Exception as e:
         print(f"Error reading configuration: {e}")
 
