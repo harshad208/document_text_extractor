@@ -8,7 +8,9 @@ from Configuration import *
 from GetTextFromImage import GetTextFromImage
 
 # Create an instance of the FastAPI class
-app = FastAPI()
+app = FastAPI(  title="Document Text Extractor",  # 👈 Change this
+    description="This is my custom API description.",
+    version="1.0.0")
 
 # Set up CORS middleware
 origins = ["*"]  # Replace "*" with the specific origins you want to allow
