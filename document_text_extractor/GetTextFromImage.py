@@ -31,10 +31,8 @@ class GetTextFromImage:
     def extract_text_from_image(self, list_images: list):
         try:
             for ldict_image in list_images:
-                # Open the image using Pillow
                 image = Image.open(ldict_image['page_path'])
 
-                # Perform OCR using pytesseract
                 text = pytesseract.image_to_string(image)
                 ldict_image['text'] = text
             return list_images

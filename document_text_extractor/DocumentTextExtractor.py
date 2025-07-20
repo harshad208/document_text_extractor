@@ -7,13 +7,11 @@ from CommonOperations import *
 from Configuration import *
 from GetTextFromImage import GetTextFromImage
 
-# Create an instance of the FastAPI class
-app = FastAPI(  title="Document Text Extractor",  # 👈 Change this
+app = FastAPI(  title="Document Text Extractor",  
     description="This is my custom API description.",
     version="1.0.0")
 
-# Set up CORS middleware
-origins = ["*"]  # Replace "*" with the specific origins you want to allow
+origins = ["*"] 
 
 app.add_middleware(
     CORSMiddleware,
@@ -24,18 +22,15 @@ app.add_middleware(
 )
 
 
-# Define a route and its handler function
 @app.get("/")
 def read_root():
     return {"message": "Hello, World"}
 
 
-# Define a route that handles HTTP POST requests
 @app.post("/file_for_text_extract/")
 async def file_for_text_extract(file: UploadFile = File(...)):
     try:
         file_contents = await file.read()
-        # Encode the file contents in Base64
         base64_string = base64.b64encode(file_contents).decode()
         file_input = convert_to_json(file.filename, file.filename.split(".")[-1], base64_string)
         lstr_file_path = convert_input_to_format(file_input, temp_path)
@@ -45,7 +40,7 @@ async def file_for_text_extract(file: UploadFile = File(...)):
         return model.SuccessResponse(message="Request processed successfully", data=llist_file_path)
 
     except Exception as e:
-        print(e)
+        logging.error(f"Error: {str(e)}", exc_info=True)
         raise HTTPException(status_code=400, detail=e)
 
 
